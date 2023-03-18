@@ -1,12 +1,14 @@
 package ca.medaviebluecross.assessment.model;
 
 import ca.medaviebluecross.assessment.utils.CommonUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
  * Simple class to implement the functions of a ceiling fan.
  */
 @Component
+@Slf4j
 public class CeilingFan {
     public static final int SPEED_OFF = 0;
     private int speed;
@@ -24,7 +26,11 @@ public class CeilingFan {
      * The ceiling fan should be “off” on December 25th all day.
      */
     public void pullCordToChangeSpeed() {
-        if (CommonUtils.isOffDay()) return;
+        log.info("Pull cord to change speed");
+        if (CommonUtils.isOffDay()) {
+            log.info("Today is OFF day");
+            return;
+        }
 
         if (speed == 3) {
             speed = SPEED_OFF;
@@ -39,7 +45,11 @@ public class CeilingFan {
      * The ceiling fan should be “off” on December 25th all day.
      */
     public void pullCordToChangeDirection() {
-        if (CommonUtils.isOffDay()) return;
+        log.info("Pull cord to change direction");
+        if (CommonUtils.isOffDay()) {
+            log.info("Today is OFF day");
+            return;
+        }
         this.direction = (this.direction == Direction.REVERSE) ? Direction.FORWARD : Direction.REVERSE;
     }
 
